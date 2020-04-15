@@ -6,8 +6,16 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const statesRouter = require('./states/states-router');
+const userActionsRouter = require('./user-actions/user-actions-router');
+
 
 const app = express();
+
+const db = require('knex')({
+  client: 'pg',
+  connection: process.env.DB_URL,
+});
+app.set('db', db);
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
@@ -24,6 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/states', statesRouter);
+app.use('/api/comments', userActionsRouter);
 
 // error handling
 // eslint-disable-next-line no-unused-vars
@@ -34,7 +43,7 @@ const errorHandler = (error, req, res, next) => {
   } else {
     response = { message: error.message, error };
   }
-
+  console.log(error);
   res.status(500).json(response);
 };
 

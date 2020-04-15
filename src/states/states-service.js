@@ -4,10 +4,10 @@ const StatesService = {
   getAllStates(knex) {
     return knex.select('*').from('us_states');
   },
-  getStateId(knex, id) {
+  getStateId(knex, state_id) {
     return knex.select('*')
       .from('us_states')
-      .where({ id })
+      .where({ state_id })
       .first();
   }
 };
