@@ -6,7 +6,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const statesRouter = require('./states/states-router');
-const userActionsRouter = require('./user-actions/user-actions-router');
+const commentsRouter = require('./comments/comments-router');
 
 
 const app = express();
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/states', statesRouter);
-app.use('/api/comments', userActionsRouter);
+app.use('/api/comments', commentsRouter);
 
 // error handling
 // eslint-disable-next-line no-unused-vars

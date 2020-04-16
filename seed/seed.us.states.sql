@@ -1,8 +1,8 @@
 INSERT INTO us_states
-    (state_name, state_id confirm_cases, confirm_fatal)
+    (state_name, id, confirm_cases, confirm_fatal)
 VALUES
-    ('New Jersey', 1, 61850, 2350),
-    ('New York', 2, 195031, 10056),
+    ('New Jersey', 0, 61850, 2350),
+    ('New York', 1, 195031, 10056),
     ('Massachusetts', 2, 25475, 756),
     ('Michigan', 3, 24638, 1487),
     ('Pennsylvania', 4, 24199, 561),
