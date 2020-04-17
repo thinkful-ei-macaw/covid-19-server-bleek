@@ -2,28 +2,27 @@
 
 const UsersService = {
   getUserData(knex) {
-    return knex.select('*').from('user_data');
+    return knex.select('*').from('user_comments');
   },
   createNewUser(knex, newUser) {
     return knex.insert(newUser)
-      .into('user_data')
+      .into('user_comments')
       .where('user_name')
       .returning('*')
       .then(rows => {
         return rows[0];
       });
   },
-  getAllcomments(knex, comments) {
-    return knex.from('user_data')
-      .select('user_name', 'user_comment', 'user_state', 'date_posted')
-      .leftJoin('us_states', 'us_states.state_name', '=', 'user_data.user_state')
-      .where('user_comment', comments)
-      .first();
+  getAllcomments(knex, state_id) {
+    return knex.from('user_comments')
+      .select('user_comments.*')
+      .leftJoin('us_states', 'us_states.id', '=', 'user_comments.state_id')
+      .where('state_id', state_id);
   },
   insertComment(knex, newComment) {
     return knex.insert(newComment)
       .into('user_comments')
-      .leftJoin('us_states', 'us_states.state_name', '=', 'user_data.user_state')
+      .leftJoin('us_states', 'us_states.id', '=', 'user_comments.state_id')
       .returning('*')
       .then(rows => {
         return rows[0];

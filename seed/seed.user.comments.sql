@@ -1,4 +1,4 @@
 INSERT INTO user_comments
-    (author, comment_body)
+    (user_name, comment_body)
 VALUES
     ('author', 'test comments')
