@@ -2,14 +2,10 @@
 
 const express = require('express');
 const commentsService = require('./comments-service');
-//const xss = require('xss');
 
 const commentsRouter = express.Router();
 const jsonParser = express.json();
 
-const createUser = user => ({
-  
-});
 
 commentsRouter.route('/')
   .get((req, res, next) => {
@@ -47,43 +43,9 @@ commentsRouter.route('/:state_id')
       
     commentsService.insertComment(knexInstance, newComment)
       .then(comment => {
-        console.log(comment);
         res.status(201).send(comment);
       })
       .catch(next);
   });
-
-
-// .patch(jsonParser, (req, res, next) => {
-//   const { user_name, comment_body, comment_id } = req.params;
-//   const updatedComment = { user_name, comment_body, comment_id };
-
-//   const commentValues = Object.values(updatedComment).filter(Boolean).length;
-//   if (commentValues === 0)
-//     return res.status(400).json({
-//       error: {
-//         message: 'Request body must be completed'
-//       }
-//     });
-//   commentsService.updateComment(
-//     req.app.get('db'),
-//     req.params.id,
-//     updatedComment
-//   )
-//     .then(comment => {
-//       res.status(204).end();
-//     })
-//     .catch(next);
-// })
-// .delete ((req, res, next) => {
-//   commentsService.deleteComment(
-//     req.app.get('db'),
-//     req.params.comment_id
-//   )
-//     .then(comment => {
-//       res.status(204).end();
-//     })
-//     .catch(next);
-// });
 
 module.exports = commentsRouter;

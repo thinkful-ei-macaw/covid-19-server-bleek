@@ -20,10 +20,6 @@ describe('Comments Endpoints', function () {
 
   after('disconnect from db', () => db.destroy());
 
-  //before('cleanup', () => helpers.cleanTables(db));
-
-  //afterEach('cleanup', () => helpers.cleanTables(db));
-
   
     
 
