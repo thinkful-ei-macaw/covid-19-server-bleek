@@ -4,7 +4,7 @@ const StatesService = require('./states-service');
 
 const statesRouter = express.Router();
 
-statesRouter.route('/state')
+statesRouter.route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db');
     StatesService.getAllStates(knexInstance)
