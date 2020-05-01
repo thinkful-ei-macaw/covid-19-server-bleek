@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const { NODE_ENV } = require('./config');
+const { NODE_ENV, CLIENT_ORIGIN } = require('./config');
 
 const statesRouter = require('./states/states-router');
 const commentsRouter = require('./comments/comments-router');
@@ -25,10 +25,14 @@ const morganOption = (NODE_ENV === 'production')
   : 'common';
 
 // set up middleware
-app.use(morgan(morganOption));
+const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common';
+app.use(morgan(morganSetting));
 app.use(helmet());
-app.use(cors());
-
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
 // request handling
 app.get('/', (req, res) => {
   res.status(200).send('Hello, world!');
@@ -46,11 +50,9 @@ const errorHandler = (error, req, res, next) => {
   } else {
     response = { message: error.message, error };
   }
-  console.log(error);
   res.status(500).json(response);
 };
 
 app.use(errorHandler);
 
-// the bottom line, literally
 module.exports = app;
