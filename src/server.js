@@ -9,4 +9,4 @@ const db = knex({
   connection: DATABASE_URL
 });
 
-app.listen(PORT, () => console.log(`Server listening in ${NODE_ENV} mode at http://localhost:${PORT} and DB ${process.env.DATABASE_URL} `));
+app.listen(PORT, () => console.log(`Server listening in ${NODE_ENV} mode at http://localhost:${PORT} and ${db} `));
