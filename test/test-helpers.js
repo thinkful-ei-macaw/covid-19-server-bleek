@@ -31,29 +31,20 @@ function makeCommentsArray() {
     },
   ];
 }
-  
+
 function seedUserComments(db, users) {
-  
-  return db.into('user_comments').insert()
+  return db
+    .into('user_comments')
+    .insert()
     .then(() =>
-    // update the auto sequence so it stays inSync
-      db.raw(
-        'SELECT setVal(\'user_comments_id_seq\', ?)',
-        [users[users.length - 1].id]
-      )
+      // update the auto sequence so it stays inSync
+      db.raw("SELECT setVal('user_comments_id_seq', ?)", [
+        users[users.length - 1].id,
+      ])
     );
 }
-  
-function seedMaliciousComment(db, user, comment) {
-  return seedUsers(db, [user])
-    .then(() =>
-      db
-        .into('user_comments')
-        .insert([])
-    );
-}
-  
+
 module.exports = {
   makeCommentsArray,
-  seedMaliciousComment
+  seedUserComments,
 };

@@ -1,6 +1,7 @@
 /* eslint-disable strict */
 const knex = require('knex');
-const expect = require('chai').expect;
+const { expect } = require('chai');
+const supertest = require('supertest');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
@@ -20,15 +21,21 @@ describe('Comments Endpoints', function () {
 
   after('disconnect from db', () => db.destroy());
 
-  
-    
+  it('responds 200 with selected state and comments for that state', () => {
+    return supertest(app)
+      .get('/')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body);
+      });
+  });
 
   it('creates a user comment, responding with 201 and the new comment', () => {
     return supertest(app)
       .post('/api/comments/' + testUserComments[0].state_id)
       .send(testUserComments[0])
       .expect(201)
-      .expect(res => {
+      .expect((res) => {
         expect(res.body).to.have.property('state_id');
         expect(res.body.comment_body).to.eql(testUserComments[0].comment_body);
         expect(res.body.user_name).to.eql(testUserComments[0].user_name);
