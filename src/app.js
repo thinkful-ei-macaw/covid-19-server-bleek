@@ -27,7 +27,7 @@ app.use(morgan(morganSetting));
 app.use(helmet());
 app.use(
   cors({
-    origin: CLIENT_ORIGIN ||
+    origin: CLIENT_ORIGIN
   })
 );
 // request handling

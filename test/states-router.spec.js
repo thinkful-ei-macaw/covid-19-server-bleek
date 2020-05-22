@@ -5,7 +5,7 @@ const supertest = require('supertest');
 const app = require('../src/app');
 const { TEST_DATABASE_URL } = require('../src/config');
 
-describe('States endpoint', () => {
+describe.only('States endpoint', () => {
   let db;
 
   before('make knex instance', () => {
