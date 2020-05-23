@@ -30,7 +30,9 @@ Returns an array of 54 objects from a STATES table, representing the 54 US state
      "confirm_cases": 25475,
      "confirm_fatal": 756
   },
-  .......
+  
+  // 40+ indices later...
+  
   {
     "state_name": "North Dakota",
      "id": 48,
@@ -42,8 +44,7 @@ Returns an array of 54 objects from a STATES table, representing the 54 US state
      "id": 49,
      "confirm_cases": 277,
      "confirm_fatal": 8
-  },
-  .........
+  }
   // (until the final id and value pairing of "id": 53)
 ]
 ```
