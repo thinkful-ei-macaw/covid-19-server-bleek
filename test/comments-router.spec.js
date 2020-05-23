@@ -11,7 +11,6 @@ describe('Comments Endpoints', function () {
   const testUserComments = helpers.makeCommentsArray();
 
   before('make knex instance', () => {
-    console.log(process.env.TEST_DB_URL);
     db = knex({
       client: 'pg',
       connection: process.env.TEST_DB_URL,
@@ -21,16 +20,25 @@ describe('Comments Endpoints', function () {
 
   after('disconnect from db', () => db.destroy());
 
-  it('responds 200 with selected state and comments for that state', () => {
+  it('should respond 200 with all the users data', () => {
     return supertest(app)
       .get('/')
       .expect(200)
       .expect((res) => {
-        expect(res.body);
+        expect(res.body).to.exist;
       });
   });
 
-  it('creates a user comment, responding with 201 and the new comment', () => {
+  it('responds 200 with selected state and comments for that state', () => {
+    return supertest(app)
+      .get('/api/comments/')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body).to.exist;
+      });
+  });
+
+  it('posts a user comment to a state_id, responding with 201 and the new comment', () => {
     return supertest(app)
       .post('/api/comments/' + testUserComments[0].state_id)
       .send(testUserComments[0])
